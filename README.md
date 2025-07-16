@@ -1,6 +1,7 @@
+This is the active ROS2 branch of this repository. If your are looking for the ROS1 version, checkout the [noetic](https://github.com/naturerobots/move_base_flex/tree/noetic) or [master](https://github.com/naturerobots/move_base_flex/tree/master) branches.
+
 [![Jazzy CI](https://github.com/naturerobots/move_base_flex/actions/workflows/jazzy.yaml/badge.svg)](https://github.com/naturerobots/move_base_flex/actions/workflows/jazzy.yaml)
 [![Humble CI](https://github.com/naturerobots/move_base_flex/actions/workflows/humble.yaml/badge.svg)](https://github.com/naturerobots/move_base_flex/actions/workflows/humble.yaml)
-This is the active ROS2 branch of this repository. If your are looking for the ROS1 version, checkout the [noetic branch](https://github.com/naturerobots/move_base_flex/tree/noetic).
 
 # Move Base Flex: A Highly Flexible Navigation Framework:
 
@@ -14,6 +15,23 @@ This repository contains Move Base Flex (MBF), a backwards-compatible replacemen
 * Concurrency: Parallel planning, recovering, controlling by selecting different concurrency slots when defining the action goal. Only different plugins instances can run in parallel.
 
 Please see also the [Move Base Flex Documentation and Tutorials](https://wiki.ros.org/move_base_flex) in the ROS wiki. And [this repository](https://github.com/Rayman/turtlebot3_mbf) contains a working minimal configuration for a turtlebot 3.
+
+## Announcements & News
+### 16.10.2024 First ROS2 Version of Move Base Flex
+The first working ROS2 version of Move Base Flex has been published.
+It targets the ROS2 distro `humble` and includes most components you know from ROS1:
+- mbf_abstract_core & mbf_abstract_nav
+- mbf_simple_core & mbf_simple_nav (for navigation components that need no map representation)
+- mbf_utility
+- mbf_msgs
+
+The ROS2 version comes with an additional package that helps with integration tests:
+- mbf_test_utility (only a test dependency)
+
+These two packages not migrated:
+- mbf_costmap_core & mbf_costmap_nav (for navigation components that utilize a 2D costmap). Nav2, which hosts the 2D costmap equivalent to the one from ROS1, and ROS1's move_base are quite different, so interfaces do not easily fit anymore. This makes migration hard. PRs are welcome for this. However, we might integrate another 2D grid map planning module soon.
+
+Note that [mesh_navigation](https://github.com/naturerobots/mesh_navigation) is also available for ROS2, now. It provides navigation components that utilize 3D mesh maps.
 
 ## Concepts & Architecture
 
@@ -30,6 +48,14 @@ MBF is an ongoing project. Some of the improvements that we have planned for the
 * Add Ackermann steering API
 * Multi Goal API + Action
 * Add new navigation server and core packages using [grid_map](https://wiki.ros.org/grid_map).
-* Constraints-based goal (see issue https://github.com/magazino/move_base_flex/issues/8)
+* Constraints-based goal (see issue https://github.com/naturerobots/move_base_flex/issues/8)
 
 But, of course you are welcome to propose new fancy features and help make them a reality! Pull Requests are always welcome!
+
+## Credit
+
+### [<img width="25" height="25" src="doc/images/logos/magazino_icon.png"> Magazino](https://www.magazino.eu/) 
+Move Base Flex was initially developed at Magazino.
+
+### [<img width="25" height="25" src="doc/images/logos/nature_robots_icon.jpg"> Nature Robots](https://naturerobots.com/)
+The latest version (ROS2) is developed and maintained by Nature Robots.
