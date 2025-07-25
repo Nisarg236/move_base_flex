@@ -2,6 +2,9 @@
 
 nav_msgs/Path path
 
+# Plan refiner to use; defaults to the first one specified on "refiner" parameter
+string refiner
+
 # use different slots for concurrency
 uint8 concurrency_slot
 
