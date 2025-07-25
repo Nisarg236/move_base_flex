@@ -40,23 +40,24 @@
  *
  */
 
-#ifndef MBF_ABSTRACT_CORE__ABSTRACT_PLAN_REFINER_H_
-#define MBF_ABSTRACT_CORE__ABSTRACT_PLAN_REFINER_H_
+#ifndef MBF_SIMPLE_CORE__ABSTRACT_PLAN_REFINER_H_
+#define MBF_SIMPLE_CORE__ABSTRACT_PLAN_REFINER_H_
 
-#include "mbf_abstract_core/abstract_plan_refiner.h"
+#include <mbf_abstract_core/abstract_plan_refiner.h>
 #include <rclcpp/rclcpp.hpp>
 
-namespace mbf_simble_core
+namespace mbf_simple_core
 {
-class SimplePlanRefiner : public mbc_abstract_core::AbstractPlanRefiner
+/**
+ * @class SimplePlanRefiner
+ * @brief Provides an interface for plan refiners used in navigation.
+ * All plan refiners written to work as MBF plugins must adhere to this interface. Alternatively, this
+ * class can also operate as a wrapper for old API nav_core-based plugins, providing backward compatibility.
+ */
+class SimplePlanRefiner : public mbf_abstract_core::AbstractPlanRefiner
 {
 public:
-  typedef std::shared_ptr< ::mbf_simple_core::SimplePlanRefiner> Ptr;
-
-  /**
-   * @brief Destructor
-   */
-  virtual ~SimplePlanRefiner() = default;
+  typedef std::shared_ptr<::mbf_simple_core::SimplePlanRefiner> Ptr;
 
   /**
    * @brief Given a plan refine it until convergence
@@ -92,14 +93,19 @@ public:
    */
   virtual void initialize(const std::string name, const rclcpp::Node::SharedPtr & node_handle) = 0;
 
+  /**
+   * @brief Destructor
+   */
+  virtual ~SimplePlanRefiner() {}
+
 protected:
   /**
    * @brief Constructor
    */
-  SimplePlanRefiner() = default;
+  SimplePlanRefiner() {}
 
 
-};  /* SimplePlanRefner*/
-}  /* namespace mbf_abstract_core */
+};  /* SimplePlanRefiner*/
+}  /* namespace mbf_simple_core */
 
-#endif /* MBF_ABSTRACT_CORE__ABSTRACT_PLAN_REFINER_H_ */
+#endif /* MBF_SIMPLE_CORE__ABSTRACT_PLAN_REFINER_H_ */
