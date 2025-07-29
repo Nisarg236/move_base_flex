@@ -180,7 +180,10 @@ void AbstractPlanRefinerExecution::run()
       } else {
         setState(REFINING, false);
 
-        outcome_ = refinePlan(current_plan, current_plan, message_);
+        std::vector<geometry_msgs::msg::PoseStamped> refined_plan;
+
+        outcome_ = refinePlan(current_plan, refined_plan, message_);
+
         bool success = outcome_ < 10;
 
         if (cancel_) {
@@ -192,7 +195,7 @@ void AbstractPlanRefinerExecution::run()
           RCLCPP_DEBUG_STREAM(node_handle_->get_logger(), "Successfully refined the plan.");
 
           std::lock_guard<std::mutex> plan_mtx_guard(plan_mtx_);
-          plan_ = current_plan;
+          plan_ = refined_plan;
           setState(REFINED_PLAN, true);
         } else if (max_retries_ > 0 && ++retries > max_retries_) {
           RCLCPP_INFO_STREAM(
