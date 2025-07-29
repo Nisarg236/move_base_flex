@@ -55,6 +55,8 @@ AbstractPlanRefinerExecution::AbstractPlanRefinerExecution(
   , plan_refiner_(plan_refiner_ptr)
   , state_(INITIALIZED)
   , max_retries_(0)
+  , refining_(false)
+  , has_new_plan_(false)
   , node_handle_(node_handle)
 {
   auto param_desc = rcl_interfaces::msg::ParameterDescriptor{};

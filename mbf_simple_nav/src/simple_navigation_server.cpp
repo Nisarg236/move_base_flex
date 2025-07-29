@@ -107,7 +107,7 @@ mbf_abstract_core::AbstractPlanRefiner::Ptr SimpleNavigationServer::loadPlanRefi
   const std::string & plan_refiner_type)
 {
   mbf_abstract_core::AbstractPlanRefiner::Ptr plan_refiner_ptr;
-  RCLCPP_DEBUG(node_->get_logger(), "Load plan refiner plugin.");
+  RCLCPP_INFO_STREAM(node_->get_logger(), "Load plan refiner plugin: " << plan_refiner_type);
   try {
     plan_refiner_ptr = plan_refiner_plugin_loader_.createSharedInstance(plan_refiner_type);
   } catch (const pluginlib::PluginlibException & ex) {
