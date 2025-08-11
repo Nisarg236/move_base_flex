@@ -72,6 +72,21 @@ AbstractPlanRefinerExecution::~AbstractPlanRefinerExecution()
 {
 }
 
+float AbstractPlanRefinerExecution::getPositionError() const
+{
+  return current_position_error_;
+}
+
+float AbstractPlanRefinerExecution::getOrientationError() const
+{
+  return current_orientation_error_;
+}
+
+float AbstractPlanRefinerExecution::getPathLengthRatio() const
+{
+  return current_path_length_ratio_;
+}
+
 typename AbstractPlanRefinerExecution::PlanRefinerState
 AbstractPlanRefinerExecution::getState() const
 {
@@ -142,9 +157,15 @@ bool AbstractPlanRefinerExecution::cancel()
 uint32_t AbstractPlanRefinerExecution::refinePlan(
   const std::vector<geometry_msgs::msg::PoseStamped> & plan,
   std::vector<geometry_msgs::msg::PoseStamped> & refined_plan,
+  float & position_error,
+  float & orientation_error,
+  float & path_length_ratio,
   std::string & message)
 {
-  return plan_refiner_->applyRefinement(plan, refined_plan, message);
+  return plan_refiner_->applyRefinement(
+    plan, refined_plan,
+    position_error, orientation_error, path_length_ratio,
+    message);
 }
 
 void AbstractPlanRefinerExecution::run()
@@ -162,6 +183,10 @@ void AbstractPlanRefinerExecution::run()
         handle_thread_interrupted();
         return;
       }
+
+      float position_error = 0.0;
+      float orientation_error = 0.0;
+      float path_length_ratio = 0.0;
 
       // Check if a new plan is available
       plan_mtx_.lock();
@@ -182,7 +207,9 @@ void AbstractPlanRefinerExecution::run()
 
         std::vector<geometry_msgs::msg::PoseStamped> refined_plan;
 
-        outcome_ = refinePlan(current_plan, refined_plan, message_);
+        outcome_ = refinePlan(
+          current_plan, refined_plan, position_error, orientation_error,
+          path_length_ratio, message_);
 
         bool success = outcome_ < 10;
 
@@ -196,6 +223,9 @@ void AbstractPlanRefinerExecution::run()
 
           std::lock_guard<std::mutex> plan_mtx_guard(plan_mtx_);
           plan_ = refined_plan;
+          current_position_error_ = position_error;
+          current_orientation_error_ = orientation_error;
+          current_path_length_ratio_ = path_length_ratio;
           setState(REFINED_PLAN, true);
         } else if (max_retries_ > 0 && ++retries > max_retries_) {
           RCLCPP_INFO_STREAM(

@@ -62,7 +62,10 @@ public:
   /**
    * @brief Given a plan refine it until convergence
    * @param plan The plan... filled by the planner
-   * @param epsilon Convergence threshold, e.g. for smoothing
+   * @param refined_plan The refined plan... filled by the refiner
+   * @param position_error The computed position error between the original and refined plan end points
+   * @param orientation_error The computed orientation error between the original and refined plan end points
+   * @param path_length_ratio The computed path length ratio between the original and refined plan
    * @param message Optional more detailed outcome as a string
    * @return Result code as described on GetPath action result:
    *         SUCCESS          = 0
@@ -78,6 +81,9 @@ public:
   virtual uint32_t applyRefinement(
     const std::vector<geometry_msgs::msg::PoseStamped> & plan,
     std::vector<geometry_msgs::msg::PoseStamped> & refined_plan,
+    float & position_error,
+    float & orientation_error,
+    float & path_length_ratio,
     std::string & message) = 0;
 
   /**

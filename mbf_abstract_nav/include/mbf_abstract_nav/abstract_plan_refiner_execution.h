@@ -116,6 +116,24 @@ public:
   PlanRefinerState getState() const;
 
   /**
+   * @brief Get the position error
+   * @return Error as float
+   */
+  float getPositionError() const;
+
+  /**
+   * @brief Get the orientation error
+   * @return Error as float
+   */
+  float getOrientationError() const;
+
+  /**
+   * @brief Get the length ratio of the refined path to the reference path
+   * @return Error as float
+   */
+  float getPathLengthRatio() const;
+
+  /**
    * @brief Cancel the plan refiner execution. This calls the cancel method of the plan refiner plugin.
    * This could be useful if the computation takes too much time, or if we are aborting the navigation.
    * @return true, if the refiner plugin tries / tried to cancel the refining step.
@@ -160,12 +178,18 @@ private:
    * @brief Calls the plan refiner plugin to refine the given plan.
    * @param plan The plan to refine
    * @param refined_plan The computed refined plan by the plugin
+   * @param position_error The computed position error between the original and refined plan end points
+   * @param orientation_error The computed orientation error between the original and refined plan end points
+   * @param path_length_ratio The computed path length ratio between the original and refined plan
    * @param message An optional message which should correspond with the returned outcome
    * @return An outcome number, see also the action definition in the RefinePath.action file
    */
-  virtual uint32_t refinePlan(
+  uint32_t refinePlan(
     const std::vector<geometry_msgs::msg::PoseStamped> & plan,
     std::vector<geometry_msgs::msg::PoseStamped> & refined_plan,
+    float & position_error,
+    float & orientation_error,
+    float & path_length_ratio,
     std::string & message);
 
   /**
@@ -195,6 +219,15 @@ private:
 
   //! main cycle variable of the execution loop
   bool refining_;
+
+  //! current position error
+  float current_position_error_;
+
+  //! current orientation error
+  float current_orientation_error_;
+
+  //! current length ratio
+  float current_path_length_ratio_;
 
   //! robot frame used for computing the current robot pose
   std::string robot_frame_;

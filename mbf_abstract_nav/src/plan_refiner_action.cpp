@@ -128,10 +128,16 @@ void PlanRefinerAction::runImpl(
 
       case AbstractPlanRefinerExecution::REFINED_PLAN:  // found a refined plan
         RCLCPP_DEBUG_STREAM(
-          rclcpp::get_logger(name_), "Plan refiner found a refined plan");
+          rclcpp::get_logger(
+            name_),
+          "Plan refiner found a refined plan with path length ratio: " <<
+            execution.getPathLengthRatio());
 
         result->refined_path.header.stamp = node_->now();
         result->refined_path.poses = execution.getPlan();
+        result->final_position_error = execution.getPositionError();
+        result->final_orientation_error = execution.getOrientationError();
+        result->path_length_ratio = execution.getPathLengthRatio();
         result->outcome = execution.getOutcome();
         result->message = execution.getMessage();
         goal_handle->succeed(result);

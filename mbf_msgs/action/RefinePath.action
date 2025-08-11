@@ -34,4 +34,9 @@ string message
 
 nav_msgs/Path refined_path
 
+# Metrics
+float64 final_position_error     # Final position error between the original and refined path
+float64 final_orientation_error  # Final orientation error between the original and refined path
+float64 path_length_ratio        # Ratio of the refined path length to the original path length
+
 ---
