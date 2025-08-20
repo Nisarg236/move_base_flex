@@ -154,40 +154,6 @@ void MbfGoalActionsPanel::constructExePathWidget()
   exe_path_ui_box_->setLayout(exe_path_ui_layout_);
 }
 
-MbfGoalActionsPanel::~MbfGoalActionsPanel()
-{
-  delete ui_layout_;
-
-  delete properity_tree_widget_;
-  delete properity_tree_model_;
-  delete goal_input_topic_;
-  delete get_path_action_server_path_;
-  delete exe_path_action_server_path_;
-
-  delete goal_input_ui_box_;
-  delete goal_input_ui_layout_;
-  delete goal_input_status_;
-
-  delete get_path_ui_box_;
-  delete get_path_ui_layout_;
-  delete get_path_ui_layout_goal_status_;
-  delete get_path_action_goal_status_;
-  delete get_path_action_goal_status_desc_;
-  delete get_path_ui_layout_server_status_;
-  delete get_path_action_server_status_;
-  delete get_path_action_server_status_desc_;
-
-  delete exe_path_ui_box_;
-  delete exe_path_ui_layout_;
-  delete exe_path_ui_layout_goal_status_;
-  delete exe_path_action_goal_status_;
-  delete exe_path_action_goal_status_desc_;
-  delete exe_path_ui_layout_server_status_;
-  delete exe_path_action_server_status_;
-  delete exe_path_action_server_status_desc_;
-}
-
-
 void MbfGoalActionsPanel::save(rviz_common::Config config) const
 {
   Panel::save(config);
