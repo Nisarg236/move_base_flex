@@ -3,8 +3,7 @@
 
 # Move Base Flex: A Highly Flexible Navigation Framework
 
-Move Base Flex (MBF) is a modular, map-agnostic navigation framework for ROS that provides well-defined interfaces and action servers for path planning, control, and recovery behaviors.
-Rather than being a complete navigation stack, MBF serves as an interface layer that enables developers to design and integrate their own navigation systems using arbitrary map representations and custom plugin implementations. Key features are:
+Move Base Flex (MBF) is a modular and map-agnostic navigation framework for ROS that provides well-defined interfaces and action servers for path planning, control, and recovery behaviors. Rather than being a complete navigation stack, MBF serves as an adaptable interface layer that enables developers to design and integrate their own navigation systems using arbitrary map representations and custom plugin implementations. Key features are:
 
 * **Map-Agnostic Interface Design**
   
