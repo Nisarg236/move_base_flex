@@ -30,9 +30,9 @@ Rather than being a complete navigation stack, MBF serves as an **interface laye
 
 ## Concepts & Architecture
 
-We have created Move Base Flex for a larger target group besides the standard developers and users of move_base and 2D navigation based on costmaps, as well as addressed move_base's limitations. Since robot navigation can be separated into planning and controlling in many cases, even for outdoor scenarios without the benefits of flat terrain, we designed MBF based on abstract planner-, controller- and recovery behavior-execution classes. To accomplish this goal, we created abstract base classes for the nav core BaseLocalPlanner, BaseGlobalPlanner and RecoveryBehavior plugin interfaces, extending the API to provide a richer and more expressive interface without breaking the current move_base plugin API. The new abstract interfaces allow plugins to return valuable information in each execution cycle, e.g. why a valid plan or a velocity command could not be computed. This information is then passed to the external executive logic through MBF planning, navigation or recovering actions’ feedback and result. The planner, controller and recovery behavior execution is implemented in the abstract execution classes without binding the software implementation to 2D costmaps. In our framework, MoveBase is just a particular implementation of a navigation system: its execution classes implement the abstract ones, bind the system to the costmaps. Thereby, the system can easily be used for other approaches, e.g. navigation on meshes or 3D occupancy grid maps. However, we provide a SimpleNavigationServer class without a binding to costmaps.
+Since robot navigation can be separated into planning and controlling in many cases, even for outdoor scenarios without the benefits of flat terrain, we designed MBF based on abstract planner-, controller- and recovery behavior-execution classes. To accomplish this goal, we created abstract base classes for the nav core BaseLocalPlanner, BaseGlobalPlanner and RecoveryBehavior plugin interfaces, extending the API to provide a rich and expressive interface. The abstract interfaces allow plugins to return valuable information in each execution cycle, e.g. why a valid plan or a velocity command could not be computed. This information is then passed to the external executive logic through MBF planning, navigation or recovering actions’ feedback and result. The planner, controller and recovery behavior execution is implemented in the abstract execution classes without binding the software implementation to 2D costmaps. In our framework, SimpleNav (or MeshNav) is just a particular implementation of a navigation system: its execution classes implement the abstract ones, bind the system to the costmaps. Thereby, the system can easily be used for other approaches, e.g. navigation on meshes or 3D occupancy grid maps. However, we provide a SimpleNavigationServer class without a binding to costmaps.
 
-MBF architecture:
+**MBF architecture:**
 ![MBF architecture](doc/images/move_base_flex.png)
 
 ## History
@@ -69,10 +69,33 @@ Move Base Flex was initially developed at Magazino.
 ### [<img width="25" height="25" src="doc/images/logos/nature_robots_icon.jpg"> Nature Robots](https://naturerobots.com/)
 The latest version (ROS2) is developed and maintained by Nature Robots.
 
+Here’s a clearer and more polished rephrasing of your section — concise but professional:
+
 ## Further Resources
 
-* [Move Base Flex Documentation and Tutorials](https://wiki.ros.org/move_base_flex)
-* [Example TurtleBot3 Configuration](https://github.com/Rayman/turtlebot3_mbf)
-* [MBF Deliberation Examples](https://github.com/amock/mbf_deliberation)
-* [MBF Tutorials](https://github.com/naturerobots/mbf_tutorials)
-* [Mesh Navigation](https://github.com/naturerobots/mesh_navigation)
+* [**Mesh Navigation**](https://github.com/naturerobots/mesh_navigation)
+  
+  Provides 3D navigation on **mesh surfaces**, implementing the **MBF interfaces** provided by this repository.
+
+* [**MBF Deliberation Examples**](https://github.com/amock/mbf_deliberation)
+  
+  Demonstrates how to invoke MBF actions using popular deliberation frameworks such as BehaviorTree.CPP and SMACH. These examples work independently of the chosen map representation.
+
+
+## Announcements & News
+
+### 16.10.2024 First ROS2 Version of Move Base Flex
+The first working ROS2 version of Move Base Flex has been published.
+It targets the ROS2 distro `humble` and includes most components you know from ROS1:
+- mbf_abstract_core & mbf_abstract_nav
+- mbf_simple_core & mbf_simple_nav (for navigation components that need no map representation)
+- mbf_utility
+- mbf_msgs
+
+The ROS2 version comes with an additional package that helps with integration tests:
+- mbf_test_utility (only a test dependency)
+
+These two packages not migrated:
+- mbf_costmap_core & mbf_costmap_nav (for navigation components that utilize a 2D costmap). Nav2, which hosts the 2D costmap equivalent to the one from ROS1, and ROS1's move_base are quite different, so interfaces do not easily fit anymore. This makes migration hard. PRs are welcome for this. However, we might integrate another 2D grid map planning module soon.
+
+Note that [mesh_navigation](https://github.com/naturerobots/mesh_navigation) is also available for ROS2, now. It provides navigation components that utilize 3D mesh maps.
