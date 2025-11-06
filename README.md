@@ -66,8 +66,6 @@ Move Base Flex was initially developed at Magazino.
 ### [<img width="25" height="25" src="doc/images/logos/nature_robots_icon.jpg"> Nature Robots](https://naturerobots.com/)
 The latest version (ROS2) is developed and maintained by Nature Robots.
 
-Here’s a clearer and more polished rephrasing of your section — concise but professional:
-
 ## Further Resources
 
 * [**Mesh Navigation**](https://github.com/naturerobots/mesh_navigation)
