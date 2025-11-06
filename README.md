@@ -70,7 +70,7 @@ The latest version (ROS2) is developed and maintained by Nature Robots.
 
 * [**Mesh Navigation**](https://github.com/naturerobots/mesh_navigation)
   
-  Provides 3D navigation on **mesh surfaces**, implementing the **MBF interfaces** provided by this repository.
+  Provides 3D navigation on mesh surfaces, implementing the MBF interfaces provided by this repository.
 
 * [**MBF Deliberation Examples**](https://github.com/amock/mbf_deliberation)
   
