@@ -3,8 +3,8 @@
 
 # Move Base Flex: A Highly Flexible Navigation Framework
 
-**Move Base Flex (MBF)** is a **modular, map-agnostic navigation framework** for ROS that provides **well-defined interfaces and action servers** for **path planning**, **control**, and **recovery behaviors**.
-Rather than being a complete navigation stack, MBF serves as an **interface layer** that enables developers to design and integrate their own navigation systems using arbitrary map representations and custom plugin implementations.
+Move Base Flex (MBF) is a modular, map-agnostic navigation framework for ROS that provides well-defined interfaces and action servers for path planning, control, and recovery behaviors.
+Rather than being a complete navigation stack, MBF serves as an interface layer that enables developers to design and integrate their own navigation systems using arbitrary map representations and custom plugin implementations.
 
 ## Key Features
 
@@ -37,8 +37,8 @@ Since robot navigation can be separated into planning and controlling in many ca
 
 ## History
 
-MBF was originally developed for **ROS 1** by [Magazino](https://www.magazino.eu/en/) (see [noetic](https://github.com/naturerobots/move_base_flex/tree/noetic) or [master](https://github.com/naturerobots/move_base_flex/tree/master) branch) as a **backwards-compatible replacement for `move_base`**, providing a more flexible and transparent architecture when no modular alternative was available.
-It has been successfully deployed in production environments, for example at **[Magazino](https://www.magazino.eu/?lang=en)**, to control **TORU robots** operating in dynamic warehouse scenarios.
+MBF was originally developed for ROS 1 by [Magazino](https://www.magazino.eu/en/) (see [noetic](https://github.com/naturerobots/move_base_flex/tree/noetic) or [master](https://github.com/naturerobots/move_base_flex/tree/master) branch) as a backwards-compatible replacement for `move_base`, providing a more flexible and transparent architecture when no modular alternative was available.
+It has been successfully deployed in production environments, for example at [Magazino](https://www.magazino.eu/?lang=en), to control TORU robots operating in dynamic warehouse scenarios.
 
 Compared to `move_base`, MBF introduced:
 
@@ -47,7 +47,7 @@ Compared to `move_base`, MBF introduced:
 * Runtime selection of multiple plugin implementations
 * Map-agnostic interface definitions
 
-With the advent of **ROS 2** and newer navigation frameworks such as **Nav2**, MBF continues to serve as a **lightweight, interface-oriented foundation** for research, prototyping, and customized navigation systems.
+With the advent of ROS 2 and newer navigation frameworks such as Nav2, MBF continues to serve as a lightweight, interface-oriented foundation for research, prototyping, and customized navigation systems.
 
 ## Future Work
 MBF is an ongoing project. Some of the improvements that we have planned for the near future are:
